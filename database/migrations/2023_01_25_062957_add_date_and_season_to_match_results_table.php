@@ -1,0 +1,34 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class AddDateAndSeasonToMatchResultsTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::table('match_results', function (Blueprint $table) {
+            $table->string('date')->after('id');
+            $table->string('season')->after('half_time_result');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::table('match_results', function (Blueprint $table) {
+            $table->dropColumn('date');
+            $table->dropColumn('season');
+        });
+    }
+}
