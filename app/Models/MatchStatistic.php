@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class MatchStatistic extends Model
 {
     use HasFactory;
+
+    protected $casts = [
+        
+    ];
 }

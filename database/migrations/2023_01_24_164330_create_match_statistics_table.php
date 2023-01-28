@@ -35,8 +35,8 @@ class CreateMatchStatisticsTable extends Migration
             $table->unsignedInteger("away_team_yellow_cards");
             $table->unsignedInteger("home_team_red_cards");
             $table->unsignedInteger("away_team_red_cards");
-            $table->unsignedInteger("home_team_bookings_points");
-            $table->unsignedInteger("away_team_bookings_points");
+            // $table->unsignedInteger("home_team_bookings_points");
+            // $table->unsignedInteger("away_team_bookings_points");
             $table->timestamps();
         });
     }
