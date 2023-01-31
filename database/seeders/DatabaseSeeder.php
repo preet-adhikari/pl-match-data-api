@@ -15,7 +15,10 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         // $this->call(MatchResultSeeder::class);
-        $this->call(MatchStatisticSeeder::class);
+        // $this->call(MatchStatisticSeeder::class);
+        // $this->call(MatchBettingOddsSeeder::class);
+        // $this->call(TotalGoalsBettingOddsSeeder::class);
+        $this->call(AsianHandicapBettingOddsSeeder::class);
 
     }
 }

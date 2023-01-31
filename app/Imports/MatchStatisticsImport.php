@@ -24,14 +24,10 @@ class MatchStatisticsImport implements ToModel, WithHeadingRow, WithChunkReading
     */
     public function model(array $row)
     {
-
         //Setting the foreign key for match id
-        $matchID = MatchResult::orderBy('date')->first();
-        // dd($matchID);
-        $row['match_id'] = $matchID->id;
-
+        
         return new MatchStatistic([
-            'match_id' => $row['match_id'],
+            'match_id' => $row[0],
             'attendance' => $row['Attendance'],
             'referee' => $row['Referee'],
             'home_team_shots' => $row['HS'],
