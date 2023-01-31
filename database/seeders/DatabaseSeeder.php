@@ -14,5 +14,11 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
+        // $this->call(MatchResultSeeder::class);
+        // $this->call(MatchStatisticSeeder::class);
+        // $this->call(MatchBettingOddsSeeder::class);
+        // $this->call(TotalGoalsBettingOddsSeeder::class);
+        $this->call(AsianHandicapBettingOddsSeeder::class);
+
     }
 }

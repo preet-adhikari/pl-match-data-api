@@ -16,6 +16,7 @@ class CreateMatchResultsTable extends Migration
         Schema::create('match_results', function (Blueprint $table) {
             $table->id();
             $table->string("division")->default("E0");
+            $table->string('date');
             $table->string("home_team");
             $table->string("away_team");
             $table->unsignedInteger("full_time_home_team_goals");
@@ -24,6 +25,7 @@ class CreateMatchResultsTable extends Migration
             $table->unsignedInteger("half_time_home_team_goals");
             $table->unsignedInteger("half_time_away_team_goals");
             $table->char("half_time_result" , 1);
+            $table->string('season');
             $table->timestamps();
         });
     }

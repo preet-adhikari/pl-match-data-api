@@ -38,9 +38,9 @@ class CreateMatchBettingOddsTable extends Migration
             $table->decimal("pinnacle_sports_home_win_odds")->nullable();
             $table->decimal("pinnacle_sports_draw_odds")->nullable();
             $table->decimal("pinnacle_sports_away_win_odds")->nullable();
-            $table->decimal("sporting_odds_home_win_odds")->nullable();
-            $table->decimal("sporting_odds_draw_odds")->nullable();
-            $table->decimal("sporting_odds_away_win_odds")->nullable();
+            // $table->decimal("sporting_odds_home_win_odds")->nullable();
+            // $table->decimal("sporting_odds_draw_odds")->nullable();
+            // $table->decimal("sporting_odds_away_win_odds")->nullable();
             $table->decimal("sportingbet_home_win_odds")->nullable();
             $table->decimal("sportingbet_draw_odds")->nullable();
             $table->decimal("sportingbet_away_win_odds")->nullable();
