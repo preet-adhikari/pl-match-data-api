@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
         // $this->call(MatchStatisticSeeder::class);
         // $this->call(MatchBettingOddsSeeder::class);
         // $this->call(TotalGoalsBettingOddsSeeder::class);
-        $this->call(AsianHandicapBettingOddsSeeder::class);
+        // $this->call(AsianHandicapBettingOddsSeeder::class);
 
     }
 }
