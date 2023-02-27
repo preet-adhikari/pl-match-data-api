@@ -23,12 +23,9 @@ Route::group(['middleware' => 'json.response'], function() {
     Route::group(['middleware' => 'auth:api'], function(){
         
         // Adding route regex registration method
-        // Route::get('hell' , function(){
-        //     dd("hellu");
-        // });
         Route::post('logout' , [ApiAuthController::class , 'logout'])->name('logout');
         Route::get('season/{season}', [SeasonDataController::class, 'getIndividualSeasonData']);
-        // Route::get('season/{season}', [SeasonDataController::class, 'getIndividualSeasonData']);
+        
     });
 
     Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
