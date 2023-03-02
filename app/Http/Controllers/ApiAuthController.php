@@ -17,13 +17,15 @@ class ApiAuthController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|unique:users,email|email',
-            'password' => 'required|confirmed|string|min:6'
+            'password' => 'required|confirmed|string|min:6',
+            'type' => 'integer'
         ]);
         // Create a new user
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password)
+            'password' => Hash::make($request->password),
+            'type' => $request->type ? $request->type : 0
         ]);
         // Generate the token
         $token = $user->createToken('Access Token');
