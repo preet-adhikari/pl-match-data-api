@@ -25,7 +25,7 @@ class ApiAuthController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'type' => $request->type ? $request->type : 0
+            'type' => ($request->type) ? $request->type : 0
         ]);
         // Generate the token
         $token = $user->createToken('Access Token');
@@ -33,7 +33,7 @@ class ApiAuthController extends Controller
         return response([
             'access_token' => $token->accessToken,
             'token_type' => 'Bearer',
-            'expires_at' => Carbon::parse($token->token->attributes['expires_at'])->toDateTimeString()
+            'expires_at' => Carbon::parse($token->token->expires_at)->toDateTimeString()
         ], 200);
     }
 

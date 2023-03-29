@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ApiAuthController;
+use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\SeasonDataController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -16,9 +17,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+
+
+
 Route::group(['middleware' => 'json.response'], function() {
     Route::post('login', [ApiAuthController::class, 'login'])->name('login');
     Route::post('register', [ApiAuthController::class, 'register'])->name('register');
+    Route::get('forgot-password', [PasswordResetController::class, 'handlePasswordReset']);
+    Route::post('forgot-password', [PasswordResetController::class, 'forgotPassword'])->name('password.reset');
+    Route::post('process-password-reset', [PasswordResetController::class, 'processPasswordRequest'])->name('password.update');
 
     Route::group(['middleware' => 'auth:api'], function(){
         
