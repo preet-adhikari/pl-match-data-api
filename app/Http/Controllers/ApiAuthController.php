@@ -42,7 +42,7 @@ class ApiAuthController extends Controller
         // Validate user
         $request->validate([
             'email' => 'required|string|email|max:255',
-            'password' => 'required|min:6|string|confirmed'
+            'password' => 'required|min:6'
         ]);
         // Login user
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password]))
