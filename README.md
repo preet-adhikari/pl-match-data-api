@@ -8,6 +8,7 @@ This application uses Laravel Passport for OAuth authentication. In order to use
 
 #### Create an account :
 
+##### Request :
 `POST /api/register` 
 
 | Variable  | Description |
@@ -19,7 +20,21 @@ This application uses Laravel Passport for OAuth authentication. In order to use
 
 You will be immediately logged in and will have the bearer token from which you can access the APIs.
 
+##### Response :
+
+```
+[
+    {
+    "access_token": "eyJ0....", // Your access bearer token
+    "token_type": "Bearer",
+    "expires_at": "20YY-MM-DD HH:MM:SS"
+    }
+]
+```
+
 #### Login :
+
+##### Request :
 
 `POST /api/login` 
 
@@ -28,14 +43,39 @@ You will be immediately logged in and will have the bearer token from which you 
 | `email`      | Enter your email     |
 | `password`      | Enter your password |
 
+The response is the same one as when you register :
+
+##### Response :
+
+```
+[
+    {
+    "access_token": "eyJ0....", // Your access bearer token
+    "token_type": "Bearer",
+    "expires_at": "20YY-MM-DD HH:MM:SS"
+    }
+]
+```
 
 #### Logout :
 
 Incase you want to logout : 
 
+##### Request :
+
 `POST /api/logout`
 
 with the Authorization token. 
+
+##### Response :
+
+```
+[
+    {
+        "message": "You have successfully been logged out."
+    }
+]    
+```
 
 #### Get data from an Individual season :
 
@@ -54,7 +94,8 @@ Here is an example:
 #### Response :
 
 ```
-{
+[
+    {
         "division": "E0",
         "date": "8/16/2014",
         "home_team": "Leicester",
@@ -79,6 +120,8 @@ Here is an example:
         "half_time_away_team_goals": 1,
         "half_time_result": "A",
         "season": "2014/2015",
-    }, ...
+    },
+    // ...additional match data 
+]   
 ```
 It'll show you the full result of the entire season that year. 
