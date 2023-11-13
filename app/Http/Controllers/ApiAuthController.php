@@ -17,13 +17,15 @@ class ApiAuthController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|unique:users,email|email',
-            'password' => 'required|confirmed|string|min:6'
+            'password' => 'required|confirmed|string|min:6',
+            'type' => 'integer'
         ]);
         // Create a new user
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password)
+            'password' => Hash::make($request->password),
+            'type' => ($request->type) ? $request->type : 0
         ]);
         // Generate the token
         $token = $user->createToken('Access Token');
@@ -31,7 +33,7 @@ class ApiAuthController extends Controller
         return response([
             'access_token' => $token->accessToken,
             'token_type' => 'Bearer',
-            'expires_at' => Carbon::parse($token->token->attributes['expires_at'])->toDateTimeString()
+            'expires_at' => Carbon::parse($token->token->expires_at)->toDateTimeString()
         ], 200);
     }
 
@@ -40,7 +42,7 @@ class ApiAuthController extends Controller
         // Validate user
         $request->validate([
             'email' => 'required|string|email|max:255',
-            'password' => 'required|min:6|string|confirmed'
+            'password' => 'required|min:6'
         ]);
         // Login user
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password]))
