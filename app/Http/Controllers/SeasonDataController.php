@@ -10,7 +10,10 @@ class SeasonDataController extends Controller
 {
     public function getSeasonData($season)
     {
-        $data = MatchResult::where('season' , 'LIKE' , $season . '%'  )->get();
+        $data = MatchResult::where('season' , 'LIKE' , $season . '%'  )->get()
+        ->map(function ($item) {   // Remove the unneccessary items
+            return collect($item)->except(['id' , 'created_at' , 'updated_at']);
+        });
         return $data;
     }
 
@@ -36,4 +39,6 @@ class SeasonDataController extends Controller
             return $data;
         }  
     }
+
+    
 }

@@ -7,6 +7,22 @@ use Illuminate\Http\Request;
 
 class MatchResultController extends Controller
 {
+    // Get a list of all the match results for a single team
+    public function getAllMatchResultsForIndividualTeam($team)
+    {
+        // Use a query function
+        $data = MatchResult::where(function($query) use ($team) {
+            $query->where('home_team' , 'LIKE' , $team . '%')
+                  ->orWhere('away_team' , 'LIKE' , $team . '%');
+        })->get()
+        ->map(function ($item) {   // Remove the unneccessary items
+            return collect($item)->except(['id' , 'created_at' , 'updated_at']);
+        });
+        return $data;
+    }
+    
+    
+    
     /**
      * Display a listing of the resource.
      *
