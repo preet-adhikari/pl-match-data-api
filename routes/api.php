@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ApiAuthController;
+use App\Http\Controllers\MatchResultController;
 use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\SeasonDataController;
 use Illuminate\Http\Request;
@@ -34,6 +35,8 @@ Route::group(['middleware' => 'json.response'], function() {
         Route::post('logout' , [ApiAuthController::class , 'logout'])->name('logout');
         Route::get('season/{season}', [SeasonDataController::class, 'getIndividualSeasonData']);
         
+        // Get individual team data
+        Route::get('team/{team}', [MatchResultController::class, 'getAllMatchResultsForIndividualTeam']);
     });
 
     Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
