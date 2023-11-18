@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\MatchResult;
+use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class MatchResultController extends Controller
 {
@@ -21,8 +23,46 @@ class MatchResultController extends Controller
         return $data;
     }
     
+    // Get a list of match results for an individual team for a particular season
+
+    public function getIndividualSeasonResultsForATeam(Request $request)
+    {
+        // Retrieve the data and put it in an array
+        //TODO: Refactor this code
+        $data = [
+            'season' => $request->season,
+            'team' => $request->team
+        ];
+
+
+        // Create validation rules 
+        $validator = Validator::make($data , [
+            'season' => 'required|numeric|digits:4',
+            'team' => 'required|string|max:255'
+        ],
+        [
+            'season.required' => 'The season should not be empty',
+            'season.numeric' => 'Please enter a valid numeric year',
+            'season.digits' => 'Please enter a year in full(containing 4 digits).',
+            'team.required' => 'The team should not be empty',
+            'team.string' => 'Please enter a valid Premier League Team'
+        ]);
+
+        // Test for validation
+        if ($validator->fails()) {
+            return $validator->errors();
+        } else {
+            $output = MatchResult::where(function($query) use ($request) {
+                $query->where('home_team' , 'LIKE' , $request->team . '%')
+                      ->orWhere('away_team' , 'LIKE' , $request->team . '%');
+            })->where('season' , 'LIKE' , $request->season . '%' )->get()
+            ->map(function ($item) {   // Remove the unneccessary items
+                return collect($item)->except(['id' , 'created_at' , 'updated_at']);
+            });
+            return $output;
+        }
     
-    
+    }
     /**
      * Display a listing of the resource.
      *
