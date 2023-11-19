@@ -37,6 +37,10 @@ Route::group(['middleware' => 'json.response'], function() {
         
         // Get individual team data
         Route::get('team/{team}', [MatchResultController::class, 'getAllMatchResultsForIndividualTeam']);
+
+        // Get a list of match results for an individual team for a particular season
+        Route::post('team_season' , [MatchResultController::class, 'getIndividualSeasonResultsForATeam']);
+
     });
 
     Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
