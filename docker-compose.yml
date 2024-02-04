@@ -3,21 +3,21 @@ services:
     laravel:
         build: 
             context: .
-            dockerfile: Dockerfile
+            dockerfile: php.Dockerfile
         ports:
-            - 80:80
+            - "127.0.0.1:8000:8000"
         depends_on:
             - db
     
     db:
-        image: postgres
+        build: 
+            context: .
+            dockerfile: postgres.Dockerfile
         restart: unless-stopped
         volumes:
-            - ./postgresql:/var/lib/postgresql/data
+            - ./postgres_data:/var/lib/postgresql/data
         ports:
-            - 5432:5432    
-        environment:
-            - POSTGRES_DB=pl_match_data_api
-            - POSTGRES_USER=postgres
-            - POSTGRES_PASSWORD=root
+            - "5432:5432"    
+        
+
     
