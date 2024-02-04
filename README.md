@@ -4,6 +4,15 @@ Contains the necessary data for Premier League matches of all the teams and thei
 
 This application uses Laravel Passport for OAuth authentication. In order to use the APIs the user must create an account using the endpoints that are given below. 
 
+### Installing it
+
+After cloning the repository,
+Run the command: 
+
+`docker-compose up -d --build`
+
+The containers will be created and let the database import all the data first.
+
 ### APIs 
 
 #### Create an account :
