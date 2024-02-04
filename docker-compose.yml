@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+    laravel:
+        build: 
+            context: .
+            dockerfile: Dockerfile
+        ports:
+            - 80:80
+        depends_on:
+            - db
+    
+    db:
+        image: postgres
+        restart: unless-stopped
+        volumes:
+            - ./postgresql:/var/lib/postgresql/data
+        ports:
+            - 5432:5432    
+        environment:
+            - POSTGRES_DB=pl_match_data_api
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=root
+    
